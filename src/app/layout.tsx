@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
+import LeftAside from "@/components/LeftAside";
+import RightAside from "@/components/RightAside";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -16,7 +19,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`overflow-y-auto h-full ${inter.className}`}>
+        <div className="md:grid md:grid-cols-12 h-full container mx-auto overflow-y-auto max-h-screen relative">
+          <aside className="md:col-span-3 border-r h-screen p-4 absolute md:sticky md:top-0 bottom-0">
+            <LeftAside />
+          </aside>
+          <div className="md:col-span-6 overflow-y-auto">{children}</div>
+          <aside className="hidden md:block sticky top-0 md:col-span-3 border-l h-screen p-4 bottom-0">
+            <RightAside />
+            arstart
+          </aside>
+        </div>
+      </body>
     </html>
   );
 }
